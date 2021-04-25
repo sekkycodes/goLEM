@@ -2,14 +2,13 @@ package provide
 
 import "io/ioutil"
 
+// JsonFileGolem is a very simple provider reading in JSON files
 type JsonFileGolem struct {
+	Source string
 }
 
-type Source interface {
-}
-
-func (jsg *JsonFileGolem) Provide(source string) (json []byte, err error) {
-	content, err := ioutil.ReadFile(source)
+func (jsg *JsonFileGolem) Provide() (json []byte, err error) {
+	content, err := ioutil.ReadFile(jsg.Source)
 	if err != nil {
 		return nil, err
 	}

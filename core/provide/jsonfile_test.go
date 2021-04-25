@@ -8,12 +8,15 @@ import (
 
 func TestProvide(t *testing.T) {
 	sut := buildSut()
-	content, err := sut.Provide("testdata/test.json")
+	content, err := sut.Provide()
 
-	assert.Nil(t, err, "no error should be set")
-	assert.NotNil(t, content, "content should be set")
+	assert := assert.New(t)
+	assert.Nil(err, "no error should be set")
+	assert.NotNil(content, "content should be set")
 }
 
-func buildSut() *JsonFileGolem {
-	return new(JsonFileGolem)
+func buildSut() JsonFileGolem {
+	return JsonFileGolem{
+		Source: "testdata/test.json",
+	}
 }

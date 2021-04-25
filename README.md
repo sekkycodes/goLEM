@@ -31,3 +31,15 @@ The plan is further to make the framework runnable in the cloud, so resources ca
 ### Testability
 
 For many such processing frameworks Testability is a huge challenge. The concept here is to have golems be mocked and stubbed out to run processes (or partial processes) in isolation. Use of interfaces for implementation simplifies mocking on a unit testing level when working on a golem.
+
+## Development
+
+### Build and Test
+
+To build the project run
+
+    bazel run //:gazelle
+
+Useful go commands:
+
+    go test
