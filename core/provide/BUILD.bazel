@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "provide",
+    srcs = [
+        "jsonfile.go",
+        "provider.go",
+    ],
+    importpath = "github.com/sekkycodes/core/provide",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "provide_test",
+    srcs = ["jsonfile_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":provide"],
+    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
+)
