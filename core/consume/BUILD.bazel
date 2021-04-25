@@ -1,8 +1,19 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "consume",
-    srcs = ["consumer.go"],
+    srcs = [
+        "consumer.go",
+        "jsonFile.go",
+    ],
     importpath = "github.com/sekkycodes/core/consume",
     visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "consume_test",
+    srcs = ["jsonFile_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":consume"],
+    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
 )

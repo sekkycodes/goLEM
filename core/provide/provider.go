@@ -1,5 +1,5 @@
 package provide
 
 type Provider interface {
-	Provide() string
+	Provide() (output []byte, err error)
 }

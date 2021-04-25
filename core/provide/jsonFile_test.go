@@ -15,8 +15,8 @@ func TestProvide(t *testing.T) {
 	assert.NotNil(content, "content should be set")
 }
 
-func buildSut() JsonFileGolem {
-	return JsonFileGolem{
+func buildSut() JsonFile {
+	return JsonFile{
 		Source: "testdata/test.json",
 	}
 }

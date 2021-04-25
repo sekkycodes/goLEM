@@ -14,5 +14,5 @@ go_test(
     name = "process_test",
     srcs = ["regexFilter_test.go"],
     embed = [":process"],
-    deps = ["@com_github_golang_mock//gomock:go_default_library"],
+    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
 )
