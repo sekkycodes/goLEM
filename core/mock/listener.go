@@ -4,6 +4,7 @@ package mock
 
 import (
 	"io/ioutil"
+	"log"
 	"net"
 	"strconv"
 )
@@ -18,8 +19,9 @@ type MockedListener struct {
 // Start opens the port and records messages sent.
 // To stop listening and free the port send "stop" to the port
 func (listener *MockedListener) Start() (err error) {
-	portStr := ":" + strconv.Itoa(listener.Port)
-	l, err := net.Listen(listener.ConnType, portStr)
+	log.Printf("starting mock listener on port %v", listener.Port)
+	portStr := strconv.Itoa(listener.Port)
+	l, err := net.Listen(listener.ConnType, "localhost:"+portStr)
 	if err != nil {
 		return err
 	}
@@ -38,8 +40,10 @@ func (listener *MockedListener) Start() (err error) {
 		}
 
 		msg := string(buf[:])
+		log.Printf("received message %v on port %v", msg, listener.Port)
 
 		if msg == "stop" {
+			log.Printf("stopping listening on port %v", listener.Port)
 			return nil
 		}
 
