@@ -18,17 +18,17 @@ type MockedListener struct {
 
 // Start opens the port and records messages sent.
 // To stop listening and free the port send "stop" to the port
-func (listener *MockedListener) Start() (err error) {
-	log.Printf("starting mock listener on port %v", listener.Port)
-	portStr := strconv.Itoa(listener.Port)
-	l, err := net.Listen(listener.ConnType, "localhost:"+portStr)
+func (l *MockedListener) Start() (err error) {
+	log.Printf("starting mock listener on port %v for %v connections", l.Port, l.ConnType)
+	portStr := strconv.Itoa(l.Port)
+	listen, err := net.Listen(l.ConnType, ":"+portStr)
 	if err != nil {
 		return err
 	}
-	defer l.Close()
+	defer listen.Close()
 
 	for {
-		conn, err := l.Accept()
+		conn, err := listen.Accept()
 		if err != nil {
 			return err
 		}
@@ -40,13 +40,13 @@ func (listener *MockedListener) Start() (err error) {
 		}
 
 		msg := string(buf[:])
-		log.Printf("received message %v on port %v", msg, listener.Port)
+		log.Printf("received message %v on port %v", msg, l.Port)
 
 		if msg == "stop" {
-			log.Printf("stopping listening on port %v", listener.Port)
+			log.Printf("stopping listening on port %v", l.Port)
 			return nil
 		}
 
-		listener.Invocations = append(listener.Invocations, msg)
+		l.Invocations = append(l.Invocations, msg)
 	}
 }

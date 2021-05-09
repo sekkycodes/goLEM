@@ -1,8 +1,15 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "mock",
-    srcs = ["udpListener.go"],
+    srcs = ["listener.go"],
     importpath = "github.com/sekkycodes/core/mock",
     visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "mock_test",
+    srcs = ["listener_test.go"],
+    embed = [":mock"],
+    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
 )

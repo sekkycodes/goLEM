@@ -19,7 +19,7 @@ func TestListener(t *testing.T) {
 	// wait 5ms for sut to spin up
 	time.Sleep(5000)
 
-	conn, err := net.Dial("tcp", "localhost:17551")
+	conn, err := net.Dial("tcp", ":17551")
 	if err != nil {
 		t.Fatal(err)
 	}
