@@ -38,7 +38,12 @@ For many such processing frameworks Testability is a huge challenge. The concept
 
 To create te bazel build files:
 
+    // just the project
     bazel run //:gazelle
+
+    // load external dependencies
+    // note: this needs the go.mod file to exist
+    bazel run //:gazelle -- update-repos -from_file=core/go.mod
 
 To build the project run
 
@@ -57,3 +62,4 @@ To build the project run
 Useful go commands:
 
     go test
+    go mod tidy

@@ -11,5 +11,5 @@ go_test(
     name = "discover_test",
     srcs = ["announcer_test.go"],
     embed = [":discover"],
-    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
+    deps = ["@com_github_stretchr_testify//assert"],
 )

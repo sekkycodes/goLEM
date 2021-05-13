@@ -11,5 +11,5 @@ go_test(
     name = "mock_test",
     srcs = ["listener_test.go"],
     embed = [":mock"],
-    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
+    deps = ["@com_github_stretchr_testify//assert"],
 )

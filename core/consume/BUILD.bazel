@@ -15,5 +15,5 @@ go_test(
     srcs = ["jsonFile_test.go"],
     data = glob(["testdata/**"]),
     embed = [":consume"],
-    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
+    deps = ["@com_github_stretchr_testify//assert"],
 )
