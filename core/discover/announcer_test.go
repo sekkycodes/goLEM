@@ -6,13 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type FakeNet struct {
-}
-
-type PacketConnMock struct {
-	Invocations []string
-}
-
 func TestAnnounce(t *testing.T) {
 	sut := buildSut()
 	message := []byte("dummy message")

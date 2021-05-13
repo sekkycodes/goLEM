@@ -1,37 +1,33 @@
 package mock
 
 import (
-	"testing"
-	"time"
-
+	"log"
 	"net"
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestListener(t *testing.T) {
 	sut := buildSut()
+	started := make(chan bool)
+	stopReceived := make(chan bool)
 
 	go func() {
-		sut.Start()
+		sut.Start(started, stopReceived)
 	}()
 
-	// wait 5ms for sut to spin up
-	time.Sleep(5000)
+	log.Println("waiting for sut to spin up")
+	<-started
+	log.Println("sut started")
 
-	conn, err := net.Dial("tcp", ":17551")
-	if err != nil {
-		t.Fatal(err)
-	}
+	go func() {
+		runTest(t)
+	}()
 
-	if conn == nil {
-		t.Fatal("connection is nil")
-	}
+	<-stopReceived
 
-	defer conn.Close()
-
-	conn.Write([]byte("test"))
-	conn.Write([]byte("stop"))
+	log.Printf("messages received: %v", sut.Invocations)
 
 	assert.Equal(t, 1, len(sut.Invocations))
 	assert.Equal(t, "test", sut.Invocations[0])
@@ -45,4 +41,22 @@ func buildSut() MockedListener {
 		ConnType:    "tcp",
 		Invocations: inv,
 	}
+}
+
+func runTest(t *testing.T) {
+	conn, err := net.Dial("tcp", ":17551")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if conn == nil {
+		t.Fatal("connection is nil")
+	}
+
+	defer conn.Close()
+
+	conn.Write([]byte("test"))
+	conn.Write([]byte("#")) // signal end of message
+	conn.Write([]byte("stop"))
+	conn.Write([]byte("#")) // signal end of message
 }

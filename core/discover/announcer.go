@@ -8,6 +8,7 @@ import (
 
 // Announces presence to other golems in the network.
 // Those golems are expected to acknowledge received information.
+// The acknowledgement is handled asynchronously.
 type Announcer struct {
 	BroadcastIp string
 	Port        int
