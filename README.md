@@ -36,9 +36,23 @@ For many such processing frameworks Testability is a huge challenge. The concept
 
 ### Build and Test
 
-To build the project run
+To create te bazel build files:
 
     bazel run //:gazelle
+
+To build the project run
+
+    // build all
+    bazel build //...
+
+    // build specific
+    bazel bulid //core/mock
+
+    // test all
+    bazel test //...
+
+    // test specific
+    bazel test //core/mock
 
 Useful go commands:
 
