@@ -2,6 +2,8 @@
 
 Note: this project is still in its conception and POC phase and might be subject to heavy changes (including core concepts!).
 
+[![Build](https://github.com/sekkycodes/golem/actions/workflows/go.yml/badge.svg)](https://github.com/sekkycodes/golem/actions/workflows/go.yml)
+
 ## The Idea
 
 What if you could run a set of functions similar to Linux pipes, but scalable as Docker containers?
