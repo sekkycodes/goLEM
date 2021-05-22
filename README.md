@@ -47,6 +47,9 @@ To create te bazel build files:
     // note: this needs the go.mod file to exist
     bazel run //:gazelle -- update-repos -from_file=core/go.mod
 
+    // load external dependency directly with gazelle
+    bazel run //:gazelle -- update-repos github.com/google/uuid
+
 To build the project run
 
     // build all

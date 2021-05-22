@@ -39,7 +39,7 @@ func (fr *FileReg) Persist(entry RegEntry) (err error) {
 		return nil
 	}
 
-	return ioutil.WriteFile(entry.id.String(), entry.Bytes(), 0664)
+	return ioutil.WriteFile(path, entry.Bytes(), 0664)
 }
 
 // Retrieve a single RegEntry object from the registry by its unique ID
@@ -81,10 +81,13 @@ func (re *RegEntry) Bytes() []byte {
 func FromBytes(bytes []byte) RegEntry {
 	fullStr := string(bytes)
 	s := strings.Split(fullStr, "|")
+	if len(s) != 3 {
+		panic("unreadable registry entry: " + fullStr)
+	}
 
-	discovered, err := strconv.ParseInt(s[3], 10, 64)
+	discovered, err := strconv.ParseInt(s[2], 10, 64)
 	if err != nil {
-		panic("unreadable registry entry: ")
+		panic("unreadable registry entry: " + fullStr)
 	}
 
 	return RegEntry{
