@@ -2,7 +2,7 @@
 
 Note: this project is still in its conception and POC phase and might be subject to heavy changes (including core concepts!).
 
-[![Build](https://github.com/sekkycodes/golem/actions/workflows/go.yml/badge.svg)](https://github.com/sekkycodes/golem/actions/workflows/go.yml)
+[![Build](https://github.com/sekkycodes/golem/actions/workflows/go.yml/badge.svg)](https://github.com/sekkycodes/golem/actions/workflows/go.yml) | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sekkycodes_golem&metric=alert_status)](https://sonarcloud.io/dashboard?id=sekkycodes_golem)
 
 ## The Idea
 
