@@ -2,14 +2,20 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "discover",
-    srcs = ["announcer.go"],
+    srcs = [
+        "announcer.go",
+        "listener.go",
+    ],
     importpath = "github.com/sekkycodes/core/discover",
     visibility = ["//visibility:public"],
 )
 
 go_test(
     name = "discover_test",
-    srcs = ["announcer_test.go"],
+    srcs = [
+        "announcer_test.go",
+        "listener_test.go",
+    ],
     embed = [":discover"],
     deps = ["@com_github_stretchr_testify//assert"],
 )
